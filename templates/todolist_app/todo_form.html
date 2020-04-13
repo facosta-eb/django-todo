@@ -1,0 +1,65 @@
+
+{% load bootstrap4 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{% bootstrap_messages %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src='main.js'></script>
+</head>
+<body class="container-fluid">
+
+    <form method="post" class="form">
+        {% csrf_token %}
+        <div class="row bg-light">
+            <div class="col">
+                <div class="row d-flex justify-content-center">
+                    {% bootstrap_field form.title %}
+                </div>
+                <div class="row d-flex justify-content-center">
+                    {% bootstrap_field form.assigned_user %}
+                </div>
+                <div class="row d-flex justify-content-center">
+                    {% bootstrap_field form.priority %}
+                </div>
+                <div class="row d-flex justify-content-center">
+                    {% bootstrap_field form.due_Date %}
+                </div>
+                <div class="row d-flex justify-content-center">
+                    {% bootstrap_field form.done %}
+                </div>
+            </div>
+            <div class="col d-flex justify-content-center">
+                {% bootstrap_field form.description %}
+            </div>
+        </div>
+        <div class="row bg-light">
+            <div class="col d-flex justify-content-center">
+                {% buttons %}
+                <button type="submit" class="btn btn-primary justify-content-center">
+                    Submit
+                </button>
+                <a href="{% url 'todo_home'%}" class="btn btn-info justify-content-center" role="button">Cancel</a>
+                {% endbuttons %}
+                
+            </div>
+            
+        </div>
+        
+      </form>
+    
+
+</body>
+
+</html>
+

@@ -1,0 +1,60 @@
+
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% bootstrap_messages %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src='main.js'></script>
+</head>
+<body class="container-fluid justify-content-center">
+    
+    <div class="jumbotron shadow">
+        <h1 class="text-center">Todo Home</h1>
+        <h5 class="text-center text-muted">- List of things i have to do but i dont want to although i really should -</h3>
+            <p>Hi {{ user.username }}!</p>
+            <p><a href="{% url 'logout' %}">logout</a></p>
+        <p class="text-center mb-0"><a href="{% url 'todo_create'%}" class="btn btn-info mt-2" role="button">Create</a></p>
+    </div>
+
+
+        <div style=margin:2em auto; class="row">
+        {% for todo in object_list %}
+            <div class="col mb-3 ml-0">
+                <div class="card shadow bg-light" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">{{ todo.title }}</h5>
+                  <p class="card-text">{{ todo.description }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    {% if not todo.done %}
+                        <li class="list-group-item text-danger bg-light">Done: {{todo.done}}</li>
+                    {% else %}
+                        <li class="list-group-item text-success bg-light">Done: {{todo.done}}</li>
+                    {% endif %}
+                    <li class="list-group-item bg-light">Assigned to: {{todo.assigned_user}}</li>
+                    <li class="list-group-item bg-light">Created by: {{todo.created_by}} <span class="text-muted">-{{todo.created}}</span></li>
+                    <li class="list-group-item bg-light">Updated by: {{todo.updated_by}} <span class="text-muted">-{{todo.updated}}</span></li>
+                </ul>
+                <div class="card-body">
+                    <a href="{% url 'todo_update' todo.id %}">Edit</a> -
+                    <a href="{% url 'todo_delete' todo.id %}">Delete</a> -
+                    <a href="{% url 'todo_reassign' todo.id %}">Reassign</a>
+                </div>
+                </div>
+            </div>   
+        {% empty %}
+            <li>No todo yet.</li>
+        {% endfor %}
+        </div>
+    
+    
+</body>
+</html>
+
