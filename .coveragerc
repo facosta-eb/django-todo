@@ -1,0 +1,19 @@
+[run]
+source =
+    todolist_app
+
+omit =
+    todolist_app/migrations/*
+    todolist_app/apps.py
+    todolist/*
+    manage.py
+
+[report]
+exclude_lines =
+    pragma: no cover
+    def setUp
+    def test_
+    return raw_input
+    print
+    if __name__ == '__main__':
+    def suite
