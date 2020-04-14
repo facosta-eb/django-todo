@@ -87,5 +87,37 @@ class TestRedirects(TestCase):
     def test_redirect_from_home(self):
         response = self.client.get('/home', follow=True)
         self.assertRedirects(response, '/login/', status_code=301)
+    
+    def test_redirect_from_create(self):
+        response = self.client.get('/create', follow=True)
+        self.assertRedirects(response, '/login/', status_code=301)
 
+
+class TestPermissionDenied(TestCase):
+
+    def setUp(self):
+        self.client = Client()
+        self.user = User.objects.create(username='testuser')
+        self.user.set_password('12345')
+        self.user.save()
+        self.user2 = User.objects.create(username='testuser2')
+        self.user2.set_password('12345')
+        self.user2.save()
+        self.p = Priority.objects.create(name="Urgent", orders=3)
+        self.p.save()
+
+    def test_detail_denied(self):
+        self.client.login(username='testuser', password='12345')
+        self.client.post('/create/', {
+            "title": 'tarea3',
+            "assigned_user": self.user.id,
+            "description": 'cosas',
+            'done': True,
+            "priority": 1,
+            }, follow=True)
+        todo_id = max(Todo.objects.all().values_list("id"))[0]
+        self.client.login(username='testuser2', password='12345')
+        response = self.client.get(f'/view/{todo_id}')
+        self.assertEqual(response.status_code, 403)
+        
 # Create your tests here.
