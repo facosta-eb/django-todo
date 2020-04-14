@@ -40,7 +40,6 @@ class TodoCreateView(GetObjectMixin, LoginRequiredMixin, CreateView):
         'title',
         'description',
         'priority',
-        'due_Date',
         'done',
         ]
     success_url = reverse_lazy('todo_detail')
@@ -62,7 +61,6 @@ class TodoUpdateView(GetObjectMixin, LoginRequiredMixin, UpdateView):
         'title',
         'description',
         'priority',
-        'due_Date',
         'done',
         ]
     login_url = '/login'

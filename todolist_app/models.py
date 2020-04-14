@@ -36,4 +36,4 @@ class Todo(models.Model):
         on_delete=models.CASCADE,
         related_name="priority",
     )
-    due_Date = models.DateField()
+    due_Date = models.DateField(auto_now_add=True)
