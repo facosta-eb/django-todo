@@ -17,9 +17,10 @@ class GetObjectMixin():
         return item
 
 
-class TodoListView(ListView):
+class TodoListView(LoginRequiredMixin, ListView):
     model = Todo
-
+    login_url = '/login'
+    redirect_field_name = ''
 
 class TodoHomeView(GetObjectMixin, LoginRequiredMixin, ListView):
     model = Todo
