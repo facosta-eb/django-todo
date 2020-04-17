@@ -35,7 +35,7 @@ SECRET_KEY = '12o7ct2_rgqcpn)%u-tg6p-c(q)o02-s8a8=1uflh&!wl+v0bo'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'todo-list-facosta.herokuapp.com',
+    'calm-basin-31389.herokuapp.com',
 ]
 
 
